@@ -24,10 +24,10 @@ app.listen(PORT, () => {
 })
 
 
-let input1 = [];
-let input2 = [];
+// let input1 = [];
+// let input2 = [];
 
-function makeNumbers('input1', 'input2'){
-  let answer = input1 + input2;
-  return answer
-}
+// function makeNumbers('input1', 'input2'){
+//   let answer = input1 + input2;
+//   return answer
+// }
