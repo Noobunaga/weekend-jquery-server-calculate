@@ -1,0 +1,25 @@
+{
+  "dependencies": {
+    "express": "^4.17.1",
+    "start": "^5.1.0"
+  },
+  "name": "exit",
+  "description": "[Project Instructions](./INSTRUCTIONS.md), this line may be removed once you have updated the README.md",
+  "version": "1.0.0",
+  "main": "index.js",
+  "devDependencies": {},
+  "scripts": {
+    "test": ".exit",
+    "start": "node server/server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Noobunaga/weekend-jquery-server-calculate.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Noobunaga/weekend-jquery-server-calculate/issues"
+  },
+  "homepage": "https://github.com/Noobunaga/weekend-jquery-server-calculate#readme"
+}
