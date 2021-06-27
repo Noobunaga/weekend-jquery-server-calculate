@@ -3,6 +3,7 @@ const bodyParser = require('body-parser')
 const app = express();
 const PORT = 5000;
 
+const previousCalculation = [];
 // This must be added before GET & POST routes.
 app.use(bodyParser.urlencoded({extended:true}));
 app.use( express.json() );
@@ -13,7 +14,25 @@ app.use(express.static('server/public'));
 // GET & POST Routes go here
 app.post('/math', (req, res) => {
   console.log('POST /math body:', req.body);
+  let firstNum = req.body.firstNum;
+  let secondNum = req.body.secondNum;
+  let operator = req.body.operator;
+  let answer = 0;
 
+  switch(operator){
+    case '+':
+      answer = Number(firstNum) + Number(secondNum);
+      break;
+    case '-':
+      answer = Number(firstNum) - Number(secondNum);
+      break;
+    case '/':
+      answer = Number(firstNum) / Number(secondNum);
+      break;
+    case '*':
+      answer = Number(firstNum) * Number(secondNum);
+      break:
+  }
   
   // always respond
   res.sendStatus(201); // 201 is good!
@@ -24,10 +43,3 @@ app.listen(PORT, () => {
 })
 
 
-// let input1 = [];
-// let input2 = [];
-
-// function makeNumbers('input1', 'input2'){
-//   let answer = input1 + input2;
-//   return answer
-// }

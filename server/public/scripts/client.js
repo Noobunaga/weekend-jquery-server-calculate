@@ -1,5 +1,7 @@
 $(document).ready(handleReady);
 
+let operator = '';
+
 function handleReady() {
   console.log("loaded and locked!")
   // when user clicks equal, run function
@@ -7,64 +9,35 @@ function handleReady() {
 //   $('#operator').on('click', differentOperator);
     $('#equalBtn').on('click', answerInputs);
     $('#clearBtn').on('click', clearInputs);
-    $('addButton').on('click', addOperator);
-    $('subButton').on('click', subOperator);
-    $('divButton').on('click', divOperator);
-    $('multButton').on('click', multOperator);
+    $('.operatorBtn').on('click', function(){
+        operator = $(this).html();
+    })
 
 }
 
-function answerInputs(){
+function numberInputs(){
     const input1 = $('#input1').val();
     const input2 = $('#input2').val();
 }
 
-function addOpertor(){
-    console.log('Addition')
-    mathOperator='+';
-}
-
-function subOpertor(){
-    console.log('Subtraction')
-    mathOperator='-';
-}
-
-function divOpertor(){
-    console.log('Division')
-    mathOperator='/';
-}
-
-function multOpertor(){
-    console.log('Multiply')
-    mathOperator='*';
-}
 
 function clearInputs(){
     $('#input1').val('');
     $('#input2').val('');
 }
-// let operator;
 
-// function differentOperator(){
-//   return operator= $(this).data('id');
-// }
+function doMath(){
+    let firstNum = $('#input1').val();
+    let secondNum = $('#input2').val();
+    let answerObj = {
+        firstNum: firstNum,
+        secondNum: secondNum,
+        operator: operator
+    }
+}
 
 
-//   // send to server
-//   $.ajax({
-//     //type
-//     method: 'POST',
-//     url: '/math',
-//     data: {inputArray:
-//         [input1, input2]
-//     } //data becomes req.body on server
-// })
-// .then( function(response) {
-//     // successful send case
-//     console.log('posted item', response);
-// })
-// .catch( function(err) {
-//     //server.js returned error case
-//     console.log('failed to post', err);
-// })
-// }
+$.ajax({
+    method:'POST',
+    url:'/math'
+})
