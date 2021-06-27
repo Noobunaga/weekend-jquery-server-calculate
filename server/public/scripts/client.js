@@ -5,10 +5,16 @@ function handleReady() {
   // when user clicks equal, run function
 
 //   $('#operator').on('click', differentOperator);
-    $('#clear-btn').on('click', clearInputs);
+    $('#clearBtn').on('click', clearInputs);
 
 }
 
+
+function clearInputs(event){
+    event.preventDefault();
+    $('#input1').val('');
+    $('#input2').val('');
+}
 // let operator;
 
 // function differentOperator(){
