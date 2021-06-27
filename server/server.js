@@ -31,9 +31,15 @@ app.post('/math', (req, res) => {
       break;
     case '*':
       answer = Number(firstNum) * Number(secondNum);
-      break:
+      break;
   }
   
+let mathPackage = {
+  firstNum: firstNum,
+  secondNum: secondNum,
+  operator: operator,
+  answer: answer
+}
   // always respond
   res.sendStatus(201); // 201 is good!
 });

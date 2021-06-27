@@ -7,7 +7,7 @@ function handleReady() {
   // when user clicks equal, run function
 
 //   $('#operator').on('click', differentOperator);
-    $('#equalBtn').on('click', answerInputs);
+    $('#equalBtn').on('click', doMath);
     $('#clearBtn').on('click', clearInputs);
     $('.operatorBtn').on('click', function(){
         operator = $(this).html();
@@ -15,10 +15,10 @@ function handleReady() {
 
 }
 
-function numberInputs(){
-    const input1 = $('#input1').val();
-    const input2 = $('#input2').val();
-}
+// function numberInputs(){
+//     const input1 = $('#input1').val();
+//     const input2 = $('#input2').val();
+//}
 
 
 function clearInputs(){
@@ -29,7 +29,7 @@ function clearInputs(){
 function doMath(){
     let firstNum = $('#input1').val();
     let secondNum = $('#input2').val();
-    let answerObj = {
+    let mathPackage = {
         firstNum: firstNum,
         secondNum: secondNum,
         operator: operator
@@ -39,5 +39,12 @@ function doMath(){
 
 $.ajax({
     method:'POST',
-    url:'/math'
-})
+    url:'/math',
+    data: mathPackage
+}).then(
+    response => {
+        let answer = response.answer;
+        $('#answer').html(`<h2>${answer}</h2>`);
+        displayHistory();
+    }
+)
