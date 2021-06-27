@@ -11,8 +11,8 @@ app.use( express.json() );
 app.use(express.static('server/public'));
 
 // GET & POST Routes go here
-app.post('/inputs', (req, res) => {
-  console.log('in post for inputs', req.body);
+app.post('/math', (req, res) => {
+  console.log('POST /math body:', req.body);
 
   
   // always respond

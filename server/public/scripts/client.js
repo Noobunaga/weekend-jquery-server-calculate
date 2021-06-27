@@ -5,13 +5,41 @@ function handleReady() {
   // when user clicks equal, run function
 
 //   $('#operator').on('click', differentOperator);
+    $('#equalBtn').on('click', answerInputs);
     $('#clearBtn').on('click', clearInputs);
+    $('addButton').on('click', addOperator);
+    $('subButton').on('click', subOperator);
+    $('divButton').on('click', divOperator);
+    $('multButton').on('click', multOperator);
 
 }
 
+function answerInputs(){
+    const input1 = $('#input1').val();
+    const input2 = $('#input2').val();
+}
 
-function clearInputs(event){
-    event.preventDefault();
+function addOpertor(){
+    console.log('Addition')
+    mathOperator='+';
+}
+
+function subOpertor(){
+    console.log('Subtraction')
+    mathOperator='-';
+}
+
+function divOpertor(){
+    console.log('Division')
+    mathOperator='/';
+}
+
+function multOpertor(){
+    console.log('Multiply')
+    mathOperator='*';
+}
+
+function clearInputs(){
     $('#input1').val('');
     $('#input2').val('');
 }
@@ -22,27 +50,21 @@ function clearInputs(event){
 // }
 
 
-// function submitNumbers() {
-//   //get input values
-//   let input1 = Number($('#input1').val());
-//   let input2 = Number($('#input2').val());
-
-
-  //send to server
-  $.ajax({
-    //type
-    method: 'POST',
-    url: '/inputs',
-    data: {inputArray:
-        [input1, input2]
-    } //data becomes req.body on server
-})
-.then( function(response) {
-    // successful send case
-    console.log('posted item', response);
-})
-.catch( function(err) {
-    //server.js returned error case
-    console.log('failed to post', err);
-})
-}
+//   // send to server
+//   $.ajax({
+//     //type
+//     method: 'POST',
+//     url: '/math',
+//     data: {inputArray:
+//         [input1, input2]
+//     } //data becomes req.body on server
+// })
+// .then( function(response) {
+//     // successful send case
+//     console.log('posted item', response);
+// })
+// .catch( function(err) {
+//     //server.js returned error case
+//     console.log('failed to post', err);
+// })
+// }
