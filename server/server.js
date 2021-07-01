@@ -21,16 +21,16 @@ app.post('/math', (req, res) => {
 
   switch(operator){
     case '+':
-      answer = Number(firstNum) + Number(secondNum);
+      answer = input1(firstNum) + input2(secondNum);
       break;
     case '-':
-      answer = Number(firstNum) - Number(secondNum);
+      answer = input1(firstNum) - input2(secondNum);
       break;
     case '/':
-      answer = Number(firstNum) / Number(secondNum);
+      answer = input1(firstNum) / input2(secondNum);
       break;
     case '*':
-      answer = Number(firstNum) * Number(secondNum);
+      answer = input1(firstNum) * input2(secondNum);
       break;
   }
   

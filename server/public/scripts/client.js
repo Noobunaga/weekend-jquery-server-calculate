@@ -1,6 +1,6 @@
 $(document).ready(handleReady);
 
-let operator = '';
+let operator = 0;
 
 function handleReady() {
   console.log("loaded and locked!")
@@ -9,9 +9,7 @@ function handleReady() {
 //   $('#operator').on('click', differentOperator);
     $('#equalBtn').on('click', doMath);
     $('#clearBtn').on('click', clearInputs);
-    $('.operatorBtn').on('click', function(){
-        operator = $(this).html();
-    })
+    $('.operatorBtn').on('click', selectOperator);
 
 }
 
@@ -20,6 +18,9 @@ function handleReady() {
 //     const input2 = $('#input2').val();
 //}
 
+function selectOperator(){
+    console.log('operation picked', $(this).text());
+}
 
 function clearInputs(){
     $('#input1').val('');
@@ -27,24 +28,33 @@ function clearInputs(){
 }
 
 function doMath(){
-    let firstNum = $('#input1').val();
-    let secondNum = $('#input2').val();
-    let mathPackage = {
+    console.log('doing math');
+
+    let mathpackage = {
         firstNum: firstNum,
         secondNum: secondNum,
         operator: operator
     }
+    $.ajax({
+        method:'POST',
+        url:'/math',
+        data: {
+            firstNum: $('#input1').val(),
+            secondNum: $('#input2').val()
+        }
+    })
+    .then(
+        response => {
+            let answer = response.answer;
+            $('#answer').html(`<h2>${answer}</h2>`);
+            displayHistory();
+        }
+    )
 }
 
 
-$.ajax({
-    method:'POST',
-    url:'/math',
-    data: mathPackage
-}).then(
-    response => {
-        let answer = response.answer;
-        $('#answer').html(`<h2>${answer}</h2>`);
-        displayHistory();
-    }
-)
+function displayHistory() {
+    
+}
+
+
