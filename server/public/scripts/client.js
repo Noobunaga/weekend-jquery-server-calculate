@@ -30,17 +30,18 @@ function clearInputs(){
 function doMath(){
     console.log('doing math');
 
-    let mathpackage = {
-        firstNum: firstNum,
-        secondNum: secondNum,
-        operator: operator
-    }
+    // let mathpackage = {
+    //     firstNum: firstNum,
+    //     secondNum: secondNum,
+    //     operator: operator
+    // }
     $.ajax({
         method:'POST',
         url:'/math',
         data: {
             firstNum: $('#input1').val(),
-            secondNum: $('#input2').val()
+            secondNum: $('#input2').val(),
+            operatorBtn: operatorBtn
         }
     })
     .then(
