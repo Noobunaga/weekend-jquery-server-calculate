@@ -1,6 +1,6 @@
 $(document).ready(handleReady);
 
-let operator = 0;
+let operator = null;
 
 function handleReady() {
   console.log("loaded and locked!")
@@ -38,10 +38,11 @@ function doMath(){
     $.ajax({
         method:'POST',
         url:'/math',
+        // req.body is data
         data: {
             firstNum: $('#input1').val(),
             secondNum: $('#input2').val(),
-            operatorBtn: operatorBtn
+            operatorBtn: operator
         }
     })
     .then(

@@ -3,7 +3,7 @@ const bodyParser = require('body-parser')
 const app = express();
 const PORT = 5000;
 
-const previousCalculation = [];
+const calculations = [];
 // This must be added before GET & POST routes.
 app.use(bodyParser.urlencoded({extended:true}));
 app.use( express.json() );
@@ -13,11 +13,11 @@ app.use(express.static('server/public'));
 
 // GET & POST Routes go here
 app.post('/math', (req, res) => {
-  console.log('POST /math body:', req.body);
-  let firstNum = req.body.firstNum;
-  let secondNum = req.body.secondNum;
+  console.log('body', req.body);
+  // let firstNum = req.body.firstNum;
+  // let secondNum = req.body.secondNum;
   let operator = req.body.operator;
-  let answer = 0;
+  let answer;
 
   switch(operator){
     case '+':
@@ -33,19 +33,23 @@ app.post('/math', (req, res) => {
       answer = input1(firstNum) * input2(secondNum);
       break;
   }
+
+  calculations.push({
+    firstNum: Number(req.body.firstNum),
+    secondNum: Number(req.body.secondNum),
+    operator: operator,
+    answer: answer
+  })
   
-let mathPackage = {
-  firstNum: firstNum,
-  secondNum: secondNum,
-  operator: operator,
-  answer: answer
-}
-  // always respond
   res.sendStatus(201); // 201 is good!
 });
 
-app.listen(PORT, () => {
-  console.log ('Server is running on port', PORT)
+app.get('/calculations', (req, res) =>{
+  res.send(calculations);
 })
+
+app.listen(PORT, () => {
+  console.log ('Server is running on port', PORT);
+});
 
 
