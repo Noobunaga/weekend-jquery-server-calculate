@@ -30,11 +30,7 @@ function clearInputs(){
 function doMath(){
     console.log('doing math');
 
-    // let mathpackage = {
-    //     firstNum: firstNum,
-    //     secondNum: secondNum,
-    //     operator: operator
-    // }
+
     $.ajax({
         method:'POST',
         url:'/math',
@@ -42,21 +38,41 @@ function doMath(){
         data: {
             firstNum: $('#input1').val(),
             secondNum: $('#input2').val(),
-            operatorBtn: operator
+            operator: operator
         }
     })
     .then(
         response => {
-            let answer = response.answer;
-            $('#answer').html(`<h2>${answer}</h2>`);
-            displayHistory();
-        }
-    )
+            console.log('POST res', res);
+            
+            previousCalculations();
+        })
+        .catch(err => {
+            console.error('POST failed', err);
+        })
 }
 
+// function previousCalculations() {
+//     $.ajax({
+//         method: 'GET',
+//         url: '/calculations'
+//     })
+//         .then( response => {
+//             console.log('GET', res);
 
-function displayHistory() {
-    
-}
+//             let previousCalculations = res[res.length -1];
+//             $('#answer').text(previousCalculations.answer);
+
+//             $('#history').empty();
+//             for (let calc of res){
+//                 $('#history').append(`
+//                     <ul>
+//                         ${calc.firstNum} ${calc.operator} ${calc.secondNum} = ${calc.answer}
+//                     </ul>
+//                 `)
+//             }
+//         })
+// }
+
 
 

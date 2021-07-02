@@ -4,6 +4,7 @@ const app = express();
 const PORT = 5000;
 
 const calculations = [];
+const history = [];
 // This must be added before GET & POST routes.
 app.use(bodyParser.urlencoded({extended:true}));
 app.use( express.json() );
@@ -14,38 +15,40 @@ app.use(express.static('server/public'));
 // GET & POST Routes go here
 app.post('/math', (req, res) => {
   console.log('body', req.body);
-  // let firstNum = req.body.firstNum;
-  // let secondNum = req.body.secondNum;
+  let firstNum = Number(req.body.firstNum);
+  let secondNum = Number(req.body.secondNum);
   let operator = req.body.operator;
-  let answer;
+  let answer = 0;
+  let calcOutput = '';
 
   switch(operator){
     case '+':
-      answer = input1(firstNum) + input2(secondNum);
+      answer = firstNum + secondNum;
+      calcOutput = `${firstNum} + ${secondNum} = ${answer}`;
       break;
     case '-':
-      answer = input1(firstNum) - input2(secondNum);
+      answer = firstNum - secondNum;
+      calcOutput = `${firstNum} - ${secondNum} = ${answer}`;
       break;
     case '/':
-      answer = input1(firstNum) / input2(secondNum);
+      answer = firstNum / secondNum;
+      calcOutput = `${firstNum} / ${secondNum} = ${answer}`;
       break;
     case '*':
-      answer = input1(firstNum) * input2(secondNum);
+      answer = firstNum * secondNum;
+      calcOutput = `${firstNum} * ${secondNum} = ${answer}`;
       break;
   }
 
-  calculations.push({
-    firstNum: Number(req.body.firstNum),
-    secondNum: Number(req.body.secondNum),
-    operator: operator,
-    answer: answer
-  })
+  history.push(calcOutput);
+
+  calculations = answer;
   
   res.sendStatus(201); // 201 is good!
 });
 
-app.get('/calculations', (req, res) =>{
-  res.send(calculations);
+app.get('/math', (req, res) =>{
+  res.json(calculations);
 })
 
 app.listen(PORT, () => {
